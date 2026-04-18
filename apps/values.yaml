@@ -2,6 +2,7 @@ config:
   spec:
     destination:
       server: https://kubernetes.default.svc
+      namespace: example
     source:
       repoURL: https://github.com/argoproj/argocd-example-apps
       targetRevision: master
