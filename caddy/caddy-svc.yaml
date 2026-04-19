@@ -1,10 +1,18 @@
-apiVersion: v1
-kind: Service
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: caddy
+  name: caddy-test
+  namespace: caddy
 spec:
-  ports:
-  - port: 8801
-    targetPort: 8801
-  selector:
-    app: caddy
+  project: default
+  source:
+    repoURL: https://github.com/your-org/caddy-repo.git
+    targetRevision:  changes
+    path: caddy
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: caddy
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
